@@ -222,6 +222,8 @@ pub struct NodeHandle {
     task_manager: TaskManager,
 }
 
+unsafe impl Send for NodeHandle {}
+
 impl NodeHandle {
     /// The [NodeConfig] the node was launched with
     pub fn config(&self) -> &NodeConfig {
