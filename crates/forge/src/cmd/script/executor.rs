@@ -9,6 +9,7 @@ use ethers::{
     solc::artifacts::CompactContractBytecode, types::transaction::eip2718::TypedTransaction,
 };
 use eyre::Result;
+/*
 use forge::{
     executor::{
         inspector::{cheatcodes::util::BroadcastableTransactions, CheatsConfig},
@@ -18,9 +19,11 @@ use forge::{
     trace::{CallTraceDecoder, Traces},
     CallKind,
 };
+*/
 use foundry_cli::utils::{ensure_clean_constructor, needs_setup};
 use foundry_common::{shell, RpcUrl};
 use foundry_utils::types::ToEthers;
+use foundry_evm::executor::{ExecutorBuilder, inspector::CheatsConfig};
 use futures::future::join_all;
 use parking_lot::RwLock;
 use std::{collections::VecDeque, sync::Arc};
@@ -188,7 +191,7 @@ impl ScriptArgs {
 
                         // Simulate mining the transaction if the user passes `--slow`.
                         if self.slow {
-                            runner.executor.env.block.number += rU256::from(1);
+                            runner.executor.env.block.number += U256::from(1);
                         }
 
                         let is_fixed_gas_limit = tx.gas.is_some();

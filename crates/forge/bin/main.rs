@@ -3,7 +3,7 @@ use clap_complete::generate;
 use eyre::Result;
 use foundry_cli::{handler, utils};
 
-mod cmd;
+use forge::cmd;
 mod opts;
 
 use cmd::{cache::CacheSubcommands, generate::GenerateSubcommands, watch};

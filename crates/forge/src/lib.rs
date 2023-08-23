@@ -32,6 +32,8 @@ pub mod result;
 /// The Forge EVM backend
 pub use foundry_evm::*;
 
+pub mod cmd;
+
 /// Metadata on how to run fuzz/invariant tests
 #[derive(Debug, Clone, Default)]
 pub struct TestOptions {

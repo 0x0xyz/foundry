@@ -2,12 +2,15 @@ use super::*;
 use alloy_primitives::{Address, Bytes, U256};
 use ethers::types::NameOrAddress;
 use eyre::Result;
+use foundry_evm::{executor::{Executor, DeployResult, EvmError, ExecutionErr, CallResult, RawCallResult, return_ok, InstructionResult}, CALLER};
+/*
 use forge::{
     executor::{CallResult, DeployResult, EvmError, ExecutionErr, Executor, RawCallResult},
     revm::interpreter::{return_ok, InstructionResult},
     trace::{TraceKind, Traces},
     CALLER,
 };
+*/
 use tracing::log::trace;
 
 /// Represents which simulation stage is the script execution at.

@@ -1,3 +1,5 @@
+use crate::{TestOptions, result::SuiteResult, MultiContractRunnerBuilder, coverage::{SummaryReporter, DebugReporter, LcovReporter, CoverageReporter}};
+
 use super::{install, test::FilterArgs};
 use alloy_primitives::{Address, Bytes, U256};
 use clap::{Parser, ValueEnum, ValueHint};
@@ -9,6 +11,7 @@ use ethers::{
     solc::{artifacts::contract::CompactContractBytecode, sourcemap::SourceMap},
 };
 use eyre::{Context, Result};
+/*
 use forge::{
     coverage::{
         analysis::SourceAnalyzer, anchors::find_anchors, ContractId, CoverageReport,
@@ -20,6 +23,7 @@ use forge::{
     utils::{build_ic_pc_map, ICPCMap},
     MultiContractRunnerBuilder, TestOptions,
 };
+*/
 use foundry_cli::{
     opts::CoreBuildArgs,
     p_println,
@@ -28,6 +32,7 @@ use foundry_cli::{
 use foundry_common::{compile::ProjectCompiler, evm::EvmArgs, fs};
 use foundry_config::{Config, SolcReq};
 use foundry_utils::types::ToEthers;
+use foundry_evm::{utils::{ICPCMap, build_ic_pc_map}, coverage::{ContractId, CoverageReport, analysis::SourceAnalyzer, ItemAnchor, anchors::find_anchors}, executor::{SpecId, inspector::CheatsConfig, opts::EvmOpts}};
 use semver::Version;
 use std::{collections::HashMap, path::PathBuf, sync::mpsc::channel};
 use tracing::trace;
@@ -158,7 +163,7 @@ impl CoverageArgs {
 
         // Extract artifacts
         let (artifacts, sources) = output.into_artifacts_with_sources();
-        let mut report = CoverageReport::default();
+        let mut report: CoverageReport = CoverageReport::default();
 
         // Collect ASTs and sources
         let mut versioned_asts: HashMap<Version, HashMap<usize, Ast>> = HashMap::new();

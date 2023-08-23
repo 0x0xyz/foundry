@@ -17,6 +17,7 @@ use ethers::{
     },
 };
 use eyre::{ContextCompat, Result, WrapErr};
+/* 
 use forge::{
     debug::DebugArena,
     decode::decode_console_logs,
@@ -29,6 +30,8 @@ use forge::{
     CallKind,
 };
 use foundry_cli::opts::MultiWallet;
+*/
+use foundry_cli::{opts::MultiWallet, utils::parse_ether_value};
 use foundry_common::{
     abi::{encode_args, format_token},
     contracts::get_contract_name,
@@ -45,11 +48,11 @@ use foundry_config::{
     Config,
 };
 use foundry_evm::{
-    decode,
-    executor::inspector::{
+    decode::{self, decode_console_logs},
+    executor::{inspector::{
         cheatcodes::{util::BroadcastableTransactions, BroadcastableTransaction},
         DEFAULT_CREATE2_DEPLOYER,
-    },
+    }, opts::EvmOpts, Backend}, trace::{CallTraceDecoder, identifier::{EtherscanIdentifier, LocalTraceIdentifier, SignaturesIdentifier}, CallTraceDecoderBuilder, TraceKind, RawOrDecodedCall, RawOrDecodedReturnData, Traces}, CallKind, debug::DebugArena,
 };
 use foundry_utils::types::{ToAlloy, ToEthers};
 use futures::future;

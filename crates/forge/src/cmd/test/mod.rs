@@ -1,8 +1,10 @@
-use super::{install, test::filter::ProjectPathsAwareFilter, watch::WatchArgs};
 use alloy_primitives::U256;
+use crate::{TestOptionsBuilder, TestOptions, MultiContractRunnerBuilder, result::{SuiteResult, TestKind, TestResult, TestStatus}, MultiContractRunner, gas_report::GasReport};
+use super::{debug::DebugArgs, install, test::filter::ProjectPathsAwareFilter, watch::WatchArgs};
 use clap::Parser;
 
 use eyre::Result;
+/*
 use forge::{
     decode::decode_console_logs,
     executor::inspector::CheatsConfig,
@@ -14,6 +16,7 @@ use forge::{
     },
     MultiContractRunner, MultiContractRunnerBuilder, TestOptions, TestOptionsBuilder,
 };
+*/
 use foundry_cli::{
     opts::CoreBuildArgs,
     utils::{self, LoadConfig},
@@ -33,7 +36,7 @@ use foundry_config::{
     get_available_profiles, Config,
 };
 use foundry_debugger::DebuggerArgs;
-use foundry_evm::fuzz::CounterExample;
+use foundry_evm::{fuzz::CounterExample, executor::inspector::CheatsConfig, trace::{identifier::{LocalTraceIdentifier, EtherscanIdentifier, SignaturesIdentifier}, CallTraceDecoderBuilder, TraceKind}, decode::decode_console_logs};
 use regex::Regex;
 use std::{collections::BTreeMap, fs, sync::mpsc::channel, time::Duration};
 use tracing::trace;
