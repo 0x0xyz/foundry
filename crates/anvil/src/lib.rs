@@ -42,7 +42,7 @@ use tokio::{
 mod service;
 
 mod config;
-pub use config::{AccountGenerator, NodeConfig, CHAIN_ID, VERSION_MESSAGE};
+pub use config::{AccountGenerator, NodeConfig, CHAIN_ID, VERSION_MESSAGE, PruneStateHistoryConfig};
 mod hardfork;
 use crate::server::{
     error::{NodeError, NodeResult},
